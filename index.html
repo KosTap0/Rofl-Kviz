@@ -386,12 +386,10 @@ function showQuestion() {
   const st = stages[state.stageIndex];
   const q = st.questions[state.questionIndex];
 
-  /* 🔀 Перемешиваем варианты для вопросов с выбором */
+   /* Без перемешивания — буквы фиксированы */
   if (q.o) {
-    const paired = q.o.map((text, i) => ({ text, correct: i === q.a }));
-    const shuffled = shuffleArray(paired);
-    state.currentOptions = shuffled;
-    state.currentCorrectIdx = shuffled.findIndex(p => p.correct);
+    state.currentOptions = q.o.map((text, i) => ({ text, correct: i === q.a }));
+    state.currentCorrectIdx = q.a;
   } else {
     state.currentOptions = null;
     state.currentCorrectIdx = -1;
